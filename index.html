@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Waste to Resource — Circular Marketplace</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="publicApp">
+<nav class="nav">
+  <div class="container navin">
+    <a class="logo" href="#"><span class="logoMark">↻</span> Waste to Resource</a>
+    <div class="navlinks">
+      <button onclick="scrollToId('market')">Marketplace</button>
+      <button onclick="scrollToId('how')">How it works</button>
+    </div>
+    <button class="ghost" onclick="openAuth('login')">Log in</button>
+    <button class="btn small" onclick="openAuth('signup')">Post / Join →</button>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container heroGrid">
+    <div>
+      <div class="kicker">Circular material marketplace</div>
+      <h1>Waste shouldn't end.<br><span>Give it a next use.</span></h1>
+      <p>Discover real waste listings and buyer requirements posted by users. Browse freely. Login is required only when you want to post, edit or manage your own data.</p>
+      <div class="actions">
+        <button class="btn" onclick="scrollToId('market')">Explore marketplace ↓</button>
+        <button class="btn secondary" onclick="openAuth('signup')">Post your material →</button>
+      </div>
+    </div>
+    <div class="heroCard">
+      <div class="kicker">Live data on this device</div>
+      <div class="big" id="heroCount">0</div>
+      <div style="color:var(--muted);margin-bottom:12px">community listings</div>
+      <div class="metric"><span>Waste available</span><b id="heroWaste">0</b></div>
+      <div class="metric"><span>Buyer requirements</span><b id="heroBuyers">0</b></div>
+      <div class="metric"><span>Data source</span><b>User posted</b></div>
+    </div>
+  </div>
+</header>
+
+<section class="section" id="market">
+<div class="container">
+  <div class="sectionHead">
+    <div><div class="kicker">01 / Discover</div><h2>Open marketplace</h2><p>Only information actually submitted by users appears here.</p></div>
+  </div>
+  <div class="market">
+    <div class="toolbar">
+      <input id="search" class="search" placeholder="Search material, company, location, application..." oninput="renderMarketplace()">
+      <select id="sort" onchange="renderMarketplace()">
+        <option value="new">Newest listing</option>
+        <option value="purity">Highest purity</option>
+        <option value="price">Lowest price</option>
+        <option value="quantity">Highest quantity</option>
+        <option value="value">Highest-value material</option>
+        <option value="offer">Best buyer offer</option>
+      </select>
+      <button class="btn small" onclick="openAuth('signup')">+ Add listing</button>
+    </div>
+    <div class="filterPanel">
+      <div class="field"><label>Material</label><select id="filterMaterial" onchange="renderMarketplace()"><option value="">All materials</option></select></div>
+      <div class="field"><label>Location</label><select id="filterLocation" onchange="renderMarketplace()"><option value="">All locations</option></select></div>
+      <div class="field"><label>Quantity</label><select id="filterQty" onchange="renderMarketplace()"><option value="">Any quantity</option><option value="small">0–2 tons</option><option value="medium">2–10 tons</option><option value="large">10+ tons</option></select></div>
+      <div class="field"><label>Price / kg</label><select id="filterPrice" onchange="renderMarketplace()"><option value="">Any price</option><option value="low">Under ₹400</option><option value="mid">₹400–₹500</option><option value="high">₹500+</option></select></div>
+      <div class="field"><label>Purity</label><select id="filterPurity" onchange="renderMarketplace()"><option value="">Any purity</option><option value="90">90%+</option><option value="95">95%+</option></select></div>
+      <div class="field"><label>Element</label><select id="filterElement" onchange="renderMarketplace()"><option value="">Any element</option><option value="copper">Copper</option><option value="aluminium">Aluminium</option><option value="gold">Gold</option><option value="silver">Silver</option></select></div>
+      <div class="field"><label>Buyer</label><input id="filterBuyer" placeholder="Buyer name" oninput="renderMarketplace()"></div>
+      <div class="field"><label>Seller</label><input id="filterSeller" placeholder="Seller name" oninput="renderMarketplace()"></div>
+      <div class="field"><label>Grade</label><select id="filterGrade" onchange="renderMarketplace()"><option value="">Any grade</option><option>A</option><option>B</option><option>C</option></select></div>
+      <div class="field"><label>Status</label><select id="filterStatus" onchange="renderMarketplace()"><option value="">Any status</option><option>Available</option><option>Negotiating</option><option>Sold</option></select></div>
+    </div>
+    <div class="tabs" id="marketTabs">
+      <button class="active" data-filter="all">All</button>
+      <button data-filter="waste">Waste available</button>
+      <button data-filter="buyer">Buyer requirements</button>
+    </div>
+    <div id="listingGrid" class="grid" style="margin-top:16px"></div>
+    <div id="compareTray" class="compareTray">
+      <b>Compare Listings</b>
+      <div id="compareNames" class="compareNames"></div>
+      <button class="btn small" onclick="openComparison()">Compare now →</button>
+      <button class="ghost" style="color:#fff" onclick="clearCompare()">Clear</button>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="section" id="how">
+<div class="container">
+  <div class="sectionHead"><div><div class="kicker">02 / Simple flow</div><h2>From waste to resource</h2><p>Public discovery. Private actions.</p></div></div>
+  <div class="howGrid">
+    <div class="card step"><div class="num">01</div><h3>Discover</h3><p>Search real material listings and buyer requirements posted by the community.</p></div>
+    <div class="card step"><div class="num">02</div><h3>Inspect</h3><p>Open a listing to see quantity, location, poster, use case, quality and other supplied details.</p></div>
+    <div class="card step"><div class="num">03</div><h3>Connect</h3><p>Login to post your own material, buyer requirement or manage your marketplace records.</p></div>
+  </div>
+</div>
+</section>
+
+<footer><div class="container">Waste to Resource · A user-driven circular material marketplace</div></footer>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard" class="dashboard">
+<div class="dashShell">
+<aside class="side">
+  <div class="sideBrand">
+    <div class="sideLogoMark">↻</div>
+    <div><strong>Waste<span>2</span>Resource</strong><small>CIRCULAR MARKET</small></div>
+  </div>
+  <div class="sideSectionLabel">WORKSPACE</div>
+  <div class="sideNav">
+    <button class="active" data-panel="overview"><span class="navIcon">⌂</span><span>Overview</span></button>
+    <button data-panel="waste"><span class="navIcon">♻</span><span>My waste</span></button>
+    <button data-panel="buyers"><span class="navIcon">◎</span><span>Buyer needs</span></button>
+    <button data-panel="post"><span class="navIcon">＋</span><span>Create listing</span></button>
+    <button data-panel="profile"><span class="navIcon">◉</span><span>Profile</span></button>
+  </div>
+  <div class="sideBottom">
+    <div class="ecoBadge"><span>●</span> Marketplace is live</div>
+    <div class="userBox">
+      <div class="avatar" id="sideAvatar">U</div>
+      <div class="userDetails"><strong id="sideName"></strong><span id="sideEmail"></span></div>
+      <button class="logoutBtn" onclick="logout()">↪</button>
+    </div>
+  </div>
+</aside>
+
+<main class="dashMain">
+  <div class="dashTop">
+    <div class="dashWelcome">
+      <div class="kicker"><span class="livePulse"></span> LIVE MARKETPLACE INTELLIGENCE</div>
+      <h1 id="dashTitle">Overview</h1>
+      <p>Track your materials, buyer demand and circular-market activity in one place.</p>
+    </div>
+    <div class="topActions">
+      <div class="topDate" id="dashToday">TODAY</div>
+      <button class="btn createBtn" onclick="showPanel('post')">＋ Create listing</button>
+    </div>
+  </div>
+
+  <section class="dashPanel active" id="panel-overview">
+    <div class="dashboardHero">
+      <div class="heroGlow"></div>
+      <div class="dashboardHeroCopy">
+        <div class="heroMiniLabel">YOUR CIRCULAR MARKETPLACE</div>
+        <h2>Turn waste data into <span>resource value.</span></h2>
+        <p>Your dashboard updates from the listings and buyer requirements you add. Build your market history as you post.</p>
+        <div class="heroButtons">
+          <button class="heroBtn" onclick="showPanel('post')">Add new material <b>→</b></button>
+          <button class="heroLink" onclick="showPanel('waste')">View my listings</button>
+        </div>
+      </div>
+      <div class="heroOrb">
+        <div class="orbRing ring1"></div><div class="orbRing ring2"></div><div class="orbCore">♻</div>
+        <span class="orbLabel label1">RECOVER</span><span class="orbLabel label2">REUSE</span><span class="orbLabel label3">TRADE</span>
+      </div>
+    </div>
+
+    <div class="sectionLabelRow">
+      <div><span class="sectionEyebrow">MARKET SNAPSHOT</span><h2>What's happening now</h2></div>
+      <span class="dataFresh"><i></i> Based on your live records</span>
+    </div>
+
+    <div class="analyticsHero">
+      <div class="kpi kpiBlue"><div class="kpiTop"><span class="kpiIcon">◈</span><small>TOTAL LISTINGS</small></div><strong id="statAll">0</strong><span>All marketplace records</span><div class="kpiAccent"></div></div>
+      <div class="kpi kpiGreen"><div class="kpiTop"><span class="kpiIcon">♻</span><small>WASTE AVAILABLE</small></div><strong id="statWaste">0</strong><span>Waste listings</span><div class="kpiAccent"></div></div>
+      <div class="kpi kpiPurple"><div class="kpiTop"><span class="kpiIcon">◎</span><small>BUYER DEMAND</small></div><strong id="statBuyer">0</strong><span>Buyer requirements</span><div class="kpiAccent"></div></div>
+      <div class="kpi kpiOrange"><div class="kpiTop"><span class="kpiIcon">✓</span><small>TRANSACTIONS</small></div><strong id="statTransactions">0</strong><span>Listings marked sold</span><div class="kpiAccent"></div></div>
+    </div>
+
+    <div class="dataRibbon">
+      <div class="dataRibbonItem"><div class="ribbonIcon">◌</div><div><small>Available quantity</small><b id="dashTotalTons">0 t</b></div></div>
+      <div class="dataRibbonItem"><div class="ribbonIcon">₹</div><div><small>Average asking price</small><b id="dashAvgPrice">₹0/kg</b></div></div>
+      <div class="dataRibbonItem"><div class="ribbonIcon">↗</div><div><small>Material recovered</small><b id="dashRecovered">0 t</b></div></div>
+      <div class="dataRibbonItem"><div class="ribbonIcon">◷</div><div><small>Last marketplace update</small><b id="dashUpdated">—</b></div></div>
+    </div>
+
+    <div class="analyticsCards dashboardAnalytics">
+      <div class="analyticsCard trendCard"><div class="analyticsHead"><div><div class="cardEyebrow"><span class="miniDot blue"></span> MARKET TREND</div><h3>Average waste price</h3><p>Monthly movement from your posted marketplace records.</p></div><span class="chartBadge">₹ / KG</span></div><div class="chartWrap" id="dashPriceTrend"></div></div>
+      <div class="analyticsCard categoryCard"><div class="analyticsHead"><div><div class="cardEyebrow"><span class="miniDot green"></span> CATEGORY MIX</div><h3>Waste available</h3><p>Current material composition.</p></div><span class="chartBadge greenBadge">LIVE</span></div><div id="dashCategory"></div></div>
+      <div class="analyticsCard compositionCard"><div class="analyticsHead"><div><div class="cardEyebrow"><span class="miniDot purple"></span> MATERIAL COMPOSITION</div><h3>Element composition</h3><p>Aggregated concentration across listings.</p></div><span class="chartBadge purpleBadge">ELEMENTS</span></div><div id="dashComposition"></div></div>
+      <div class="analyticsCard buyersCard"><div class="analyticsHead"><div><div class="cardEyebrow"><span class="miniDot orange"></span> BUYER ACTIVITY</div><h3>Top buyers by volume</h3><p>Based on buyer names and listing quantities.</p></div><span class="chartBadge orangeBadge">VOLUME</span></div><div id="dashBuyers"></div></div>
+      <div class="analyticsCard demandCard"><div class="analyticsHead"><div><div class="cardEyebrow"><span class="miniDot blue"></span> DEMAND VS SUPPLY</div><h3>Market balance</h3><p>Listing counts and tonnage by material.</p></div><span class="chartBadge">BALANCE</span></div><div id="dashDemand"></div></div>
+      <div class="analyticsCard materialPriceCard"><div class="analyticsHead"><div><div class="cardEyebrow"><span class="miniDot purple"></span> PRICE INTELLIGENCE</div><h3>Average price by material</h3><p>Seller asking price per kg.</p></div><span class="chartBadge purpleBadge">₹ / KG</span></div><div id="dashMaterialPrice"></div></div>
+      <div class="analyticsCard locationCard"><div class="analyticsHead"><div><div class="cardEyebrow"><span class="miniDot green"></span> GEOGRAPHY</div><h3>Where material is available</h3><p>Quantity across posted locations.</p></div><span class="chartBadge greenBadge">TONS</span></div><div id="dashLocations"></div></div>
+      <div class="analyticsCard activityCard"><div class="analyticsHead"><div><div class="cardEyebrow"><span class="miniDot orange"></span> RECENT ACTIVITY</div><h3>Marketplace activity</h3><p>Latest posted and sold records.</p></div><span class="chartBadge orangeBadge">LIVE</span></div><div id="dashRecent"></div></div>
+    </div>
+
+    <div class="card latestCard"><div class="sectionHead"><div><div class="sectionEyebrow">YOUR ACTIVITY</div><h2>Latest listings</h2></div><button class="btn small" onclick="showPanel('post')">＋ Create listing</button></div><div id="recentMine"></div></div>
+  </section>
+
+  <section class="dashPanel" id="panel-waste"><div class="card pageCard"><div class="sectionHead"><div><div class="sectionEyebrow">YOUR MATERIALS</div><h2>My waste listings</h2></div><button class="btn small" onclick="openPost('waste')">＋ Post waste</button></div><div id="myWaste"></div></div></section>
+  <section class="dashPanel" id="panel-buyers"><div class="card pageCard"><div class="sectionHead"><div><div class="sectionEyebrow">YOUR REQUIREMENTS</div><h2>My buyer needs</h2></div><button class="btn small" onclick="openPost('buyer')">＋ Post requirement</button></div><div id="myBuyer"></div></div></section>
+
+  <section class="dashPanel" id="panel-post"><div class="card pageCard"><div class="sectionEyebrow">CREATE REAL DATA</div><h2>Publish a listing</h2><p style="color:var(--muted)">This record will be saved to this browser and attributed to your logged-in profile. Nothing is pre-filled as marketplace data.</p>
+    <form id="listingForm" onsubmit="createListing(event)"><input type="hidden" id="editingId" value=""><div class="formGrid">
+      <div class="field"><label>Listing type</label><select id="fType" onchange="toggleTypeFields()"><option value="waste">Waste available</option><option value="buyer">Buyer requirement</option></select></div>
+      <div class="field"><label>Title</label><input id="fTitle" required placeholder="e.g. Copper wire scrap — 2.5 tons"></div>
+      <div class="field"><label>Material / category</label><input id="fMaterial" required placeholder="E-waste / Plastic / Copper / Aluminium / Steel"></div>
+      <div class="field"><label>Quantity (tons)</label><input id="fQty" type="number" min="0" step="0.01" placeholder="Available quantity"></div>
+      <div class="field"><label>Location</label><input id="fLocation" required placeholder="City / plant / site"></div>
+      <div class="field"><label>Application / intended use</label><input id="fApplication" placeholder="e.g. Recycling, cement, casting"></div>
+      <div class="field"><label>Seller expected price (₹ / kg)</label><input id="fPrice" type="number" min="0" step="0.01" placeholder="e.g. 450"></div>
+      <div class="field"><label>Buyer offered price (₹ / kg)</label><input id="fBuyerOffer" type="number" min="0" step="0.01" placeholder="e.g. 420"></div>
+      <div class="field"><label>Buyer / company</label><input id="fBuyer" placeholder="Buyer or company name"></div>
+      <div class="field"><label>Purity (%)</label><input id="fPurity" type="number" min="0" max="100" step="0.01" placeholder="e.g. 99.5"></div>
+      <div class="field"><label>Grade</label><select id="fGrade"><option value="">Select grade</option><option>A</option><option>B</option><option>C</option><option>Industrial</option><option>Mixed</option></select></div>
+      <div class="field"><label>Status</label><select id="fStatus"><option>Available</option><option>Negotiating</option><option>Reserved</option><option>Sold</option></select></div>
+      <div class="field"><label>Collection date</label><input id="fCollectionDate" type="date"></div>
+      <div class="field"><label>Seller verification</label><select id="fSellerVerified"><option>Unverified seller</option><option>Verified seller</option></select></div>
+      <div class="field"><label>Buyer verification</label><select id="fBuyerVerified"><option>Unverified buyer</option><option>Verified buyer</option></select></div>
+      <div class="field"><label>Recovered material (tons)</label><input id="fRecovered" type="number" min="0" step="0.01"></div>
+      <div class="field"><label>Landfill avoided (tons)</label><input id="fLandfill" type="number" min="0" step="0.01"></div>
+      <div class="field"><label>Processing capacity (tons)</label><input id="fCapacity" type="number" min="0" step="0.01"></div>
+      <div class="field fieldWide"><label>Element concentration (%)</label><div class="elementFormGrid"><input id="fCopper" type="number" min="0" max="100" step="0.01" placeholder="Copper %"><input id="fAluminium" type="number" min="0" max="100" step="0.01" placeholder="Aluminium %"><input id="fGold" type="number" min="0" max="100" step="0.01" placeholder="Gold %"><input id="fSilver" type="number" min="0" max="100" step="0.01" placeholder="Silver %"><input id="fOther" type="number" min="0" max="100" step="0.01" placeholder="Other %"></div></div>
+      <div class="field fieldWide"><label>Description</label><textarea id="fDescription" placeholder="Describe the material, condition, quality, handling requirements, etc."></textarea></div>
+    </div><div class="formActions"><button class="btn secondary" type="button" onclick="showPanel('overview')">Cancel</button><button class="btn" type="submit" id="listingSubmit">Publish listing →</button></div></form>
+  </div></section>
+
+  <section class="dashPanel" id="panel-profile"><div class="card pageCard"><div class="sectionEyebrow">ACCOUNT</div><h2>Your profile</h2><div class="profile" style="margin-top:18px"><div class="avatar" id="avatar"></div><div><b id="profileName"></b><div id="profileEmail" style="color:var(--muted)"></div></div></div></div></section>
+</main>
+</div>
+</div>
+
+<!-- AUTH -->
+<div id="authOverlay" class="overlay hidden">
+<div class="modal">
+<button class="close" onclick="closeAuth()">×</button>
+<div class="kicker">ACCESS</div><h2 id="authTitle">Login</h2><p id="authSub">Sign in to manage your listings.</p>
+<form id="authForm" onsubmit="submitAuth(event)">
+  <div id="signupNameField" class="field hidden" style="margin-bottom:13px"><label>Full name / organisation name</label><input id="authName"></div>
+  <div class="field" style="margin-bottom:13px"><label>Email</label><input id="authEmail" type="email" required placeholder="you@example.com"></div>
+  <div class="field"><label>Password</label><input id="authPassword" type="password" required minlength="4" placeholder="At least 4 characters"></div>
+  <div id="authError" class="notice error hidden"></div>
+  <div class="formActions"><button type="button" class="btn secondary" onclick="closeAuth()">Cancel</button><button class="btn" id="authSubmit">Login →</button></div>
+</form>
+<p style="text-align:center;font-size:13px">No account? <button class="ghost" style="padding:0" onclick="switchAuth('signup')">Create one</button></p>
+</div>
+</div>
+
+<!-- DETAIL -->
+<div id="detailOverlay" class="overlay hidden"><div class="modal"><button class="close" onclick="closeDetail()">×</button><div id="detailContent"></div></div></div>
+
+<script src="script.js"></script>
+</body>
+</html>
