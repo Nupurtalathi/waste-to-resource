@@ -1,3 +1,7 @@
+
+
+
+
 # Waste to Resource — Circular Marketplace
 
 A front-end-only marketplace where industries list **waste materials** (fly ash, slag, e-waste, etc.) and buyers post **material requirements**, so waste can be matched to reuse. Everything runs in the browser and saves to `localStorage` — no backend, no build step.
@@ -19,6 +23,10 @@ waste-marketplace/
    - Optional local server: `python -m http.server 8000` and open `http://localhost:8000`.
 
 No installs or internet connection required.
+
+https://github.com/user-attachments/assets/de5a74e8-0030-4e67-aa08-a89e48b542cd
+
+
 
 ## App flow
 
